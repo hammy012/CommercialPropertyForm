@@ -1,8 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-  
-  // ==========================================
-  // STATE VARIABLES
-  // ==========================================
   let currentStep = 1;
   const totalSteps = 9;
   
