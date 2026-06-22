@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Commercial Property and General Liability Insurance Quote</title>
+  <!-- Load Inter and Outfit Fonts for a premium look -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Sticky Header -->
+  <header class="sticky-header">
+    <div class="header-container">
+      <div class="header-logo">
+        <img src="logo.jpeg" alt="TD Insurance Logo" class="logo-img">
+      </div>
+      <div class="header-title">
+        Commercial Property and/or General Liability Insurance Quote
+      </div>
+      <div class="header-phone">
+        <a href="tel:1-833-699-0452" class="phone-link">
+          <span class="phone-icon">📞</span>
+          <span class="phone-number">1-833-699-0452</span>
+          <span class="phone-arrow">&gt;</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Progress Bar Subheader -->
+  <div class="progress-subheader">
+    <div class="progress-container">
+      <div class="progress-left">
+        <span class="progress-step-text">Step <strong id="current-step-num">1</strong> of 9</span>
+        <span class="progress-divider">—</span>
+        <span id="current-step-title" class="progress-title-text">Getting Started</span>
+      </div>
+      <div class="progress-right">
+      </div>
+    </div>
+    <!-- Visual Progress Line -->
+    <div class="progress-bar-bg">
+      <div id="progress-bar-fill" class="progress-bar-fill" style="width: 11.1%;"></div>
+    </div>
+  </div>
+
+  <!-- Main Multi-step Form Content -->
+  <main class="main-content">
+    <div class="form-wrapper">
+      
+      <form id="quote-form" novalidate>
+        
+        <!-- Step 1: Coverage Start Date -->
+        <section id="step-1" class="step-card active">
+          <div class="step-header">
+            <h2 class="step-question">When do you want coverage to start?</h2>
+            <p class="step-instruction">Enter the coverage start date below.</p>
+          </div>
+          
+          <div class="step-body">
+            <div class="form-group date-picker-group">
+              <label for="coverage-date-input" class="field-label">Coverage Start Date</label>
+              <div class="input-with-icon">
+                <input type="text" id="coverage-date-input" name="coverage_start_date" placeholder="Select coverage start date" readonly>
+                <button type="button" class="input-icon-btn" id="calendar-toggle-btn" aria-label="Open Calendar">
+                  📅
+                </button>
+              </div>
+              <p class="field-subtext">Select a coverage start date within 90 days from the date you began this quote</p>
+              <div class="error-message" id="error-date">Please select a valid coverage start date.</div>
+              
+              <!-- Custom Calendar Dropdown -->
+              <div id="custom-calendar" class="custom-calendar-popup hidden">
+                <div class="calendar-header">
+                  <button type="button" class="cal-nav-btn" id="cal-prev-month">&lt;</button>
+                  <span id="cal-month-year-label" class="cal-title">Month Year</span>
+                  <button type="button" class="cal-nav-btn" id="cal-next-month">&gt;</button>
+                </div>
+                <div class="calendar-weekdays">
+                  <div>Su</div><div>Mo</div><div>Tu</div><div>We</div><div>Th</div><div>Fr</div><div>Sa</div>
+                </div>
+                <div class="calendar-days" id="calendar-days-grid">
+                  <!-- JS will render days here -->
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Bottom Navigation Buttons -->
+          <div class="step-navigation">
+            <button type="button" class="btn btn-secondary btn-back" disabled style="opacity: 0.5; cursor: not-allowed;">
+              <span class="btn-arrow">&larr;</span> Back
+            </button>
+            <a href="#" class="help-link">Help?</a>
+            <button type="button" class="btn btn-primary btn-next" data-next-target="2">
+              Confirm &amp; Continue <span class="btn-arrow">&rarr;</span>
+            </button>
+          </div>
+        </section>
+
+        <!-- Step 2: Profession/Industry Search & Select -->
+        <section id="step-2" class="step-card">
+          <div class="step-header">
+            <h2 class="step-question">What is your profession/industry?</h2>
+            <p class="step-instruction">Search and select your primary business activity.</p>
+          </div>
+          
+          <div class="step-body">
+            <div class="form-group searchable-select-group">
+              <label for="industry-search-input" class="field-label">Profession or Industry</label>
+              <div class="input-with-icon">
+                <input type="text" id="industry-search-input" name="profession_industry" placeholder="Search profession (e.g. Consultant, Retail...)" autocomplete="off">
+                <span class="select-chevron">▼</span>
+              </div>
+              <p class="field-subtext">E.g. Construction Contractor, Consultant, Retail, etc.</p>
+              <div class="error-message" id="error-industry">Please search and select a profession from the list.</div>
+              
+              <!-- Search Results Dropdown List -->
+              <div id="industry-dropdown" class="industry-dropdown-list hidden">
+                <!-- JS will populate options here -->
+              </div>
+            </div>
+          </div>
+          
+          <!-- Bottom Navigation Buttons -->
+          <div class="step-navigation">
+            <button type="button" class="btn btn-secondary btn-back" data-back-target="1">
+              <span class="btn-arrow">&larr;</span> Back
+            </button>
+            <a href="#" class="help-link">Help?</a>
+            <button type="button" class="btn btn-primary btn-next" data-next-target="3">
+              Confirm &amp; Continue <span class="btn-arrow">&rarr;</span>
+            </button>
+          </div>
+        </section>
+
+        <!-- Step 3: Business Information -->
+        <section id="step-3" class="step-card">
+          <div class="step-header">
+            <h2 class="step-question">Business Information</h2>
+            <p class="step-instruction">What's the primary business address?</p>
+          </div>
+          
+          <div class="step-body">
+            <div class="address-fields-grid">
+              
+              <div class="form-group col-span-full">
+                <label for="business-address" class="field-label">Business Address</label>
+                <input type="text" id="business-address" name="business_address" placeholder="Enter the business address">
+                <div class="error-message" id="error-address">Please enter the business address.</div>
+              </div>
+              
+              <div class="form-group">
+                <label for="business-city" class="field-label">City</label>
+                <input type="text" id="business-city" name="business_city" placeholder="Enter city">
+                <div class="error-message" id="error-city">Please enter the city.</div>
+              </div>
+              
+              <div class="form-group">
+                <label for="business-province" class="field-label">Province</label>
+                <div class="select-wrapper">
+                  <select id="business-province" name="business_province">
+                    <option value="" disabled selected>Select Province</option>
+                    <option value="AB">Alberta</option>
+                    <option value="BC">British Columbia</option>
+                    <option value="MB">Manitoba</option>
+                    <option value="NB">New Brunswick</option>
+                    <option value="NL">Newfoundland and Labrador</option>
+                    <option value="NS">Nova Scotia</option>
+                    <option value="ON">Ontario</option>
+                    <option value="PE">Prince Edward Island</option>
+                    <option value="QC">Quebec</option>
+                    <option value="SK">Saskatchewan</option>
+                    <option value="NT">Northwest Territories</option>
+                    <option value="NU">Nunavut</option>
+                    <option value="YT">Yukon</option>
+                  </select>
+                </div>
+                <div class="error-message" id="error-province">Please select a province.</div>
+              </div>
+              
+              <div class="form-group">
+                <label for="business-postal" class="field-label">Postal Code</label>
+                <input type="text" id="business-postal" name="business_postal_code" placeholder="A1A 1A1" maxlength="7">
+                <div class="error-message" id="error-postal">Please enter a valid Canadian postal code (e.g. M5V 2T6).</div>
+              </div>
+              
+            </div>
+          </div>
+          
+          <!-- Bottom Navigation Buttons -->
+          <div class="step-navigation">
+            <button type="button" class="btn btn-secondary btn-back" data-back-target="2">
+              <span class="btn-arrow">&larr;</span> Back
+            </button>
+            <a href="#" class="help-link">Help?</a>
+            <button type="button" class="btn btn-primary btn-next" data-next-target="4">
+              Confirm &amp; Continue <span class="btn-arrow">&rarr;</span>
+            </button>
+          </div>
+        </section>
+
+        <!-- Step 4: About the Primary Business Owner -->
+        <section id="step-4" class="step-card">
+          <div class="step-header">
+            <h2 class="step-question">About the Primary Business Owner</h2>
+            <p class="step-instruction">Please provide the details of the primary business owner.</p>
+          </div>
+          
+          <div class="step-body">
+            <div class="owner-fields-grid">
+              
+              <!-- Owner Name Block -->
+              <h3 class="subsection-title">What's the business owner's name?</h3>
+              
+              <div class="form-group">
+                <label for="owner-first-name" class="field-label">First Name</label>
+                <input type="text" id="owner-first-name" name="owner_first_name" placeholder="First name">
+                <div class="error-message" id="error-first-name">Please enter the first name.</div>
+              </div>
+              
+              <div class="form-group">
+                <label for="owner-last-name" class="field-label">Last Name</label>
+                <input type="text" id="owner-last-name" name="owner_last_name" placeholder="Last name">
+                <div class="error-message" id="error-last-name">Please enter the last name.</div>
+              </div>
+              
+              <div class="form-group col-span-full">
+                <label for="owner-preferred-name" class="field-label">Preferred Name (Optional)</label>
+                <input type="text" id="owner-preferred-name" name="owner_preferred_name" placeholder="Add preferred name">
+              </div>
+
+              <!-- Owner DOB Block -->
+              <h3 class="subsection-title col-span-full">What's the owner's date of birth?</h3>
+              
+              <div class="dob-group col-span-full">
+                <div class="form-group">
+                  <label for="dob-year" class="field-label">Year</label>
+                  <div class="select-wrapper">
+                    <select id="dob-year" name="owner_dob_year">
+                      <option value="" disabled selected>Year</option>
+                      <!-- JS will populate years -->
+                    </select>
+                  </div>
+                </div>
+                
+                <div class="form-group">
+                  <label for="dob-month" class="field-label">Month</label>
+                  <div class="select-wrapper">
+                    <select id="dob-month" name="owner_dob_month">
+                      <option value="" disabled selected>Month</option>
+                      <option value="0">January</option>
+                      <option value="1">February</option>
+                      <option value="2">March</option>
+                      <option value="3">April</option>
+                      <option value="4">May</option>
+                      <option value="5">June</option>
+                      <option value="6">July</option>
+                      <option value="7">August</option>
+                      <option value="8">September</option>
+                      <option value="9">October</option>
+                      <option value="10">November</option>
+                      <option value="11">December</option>
+                    </select>
+                  </div>
+                </div>
+                
+                <div class="form-group">
+                  <label for="dob-day" class="field-label">Day</label>
+                  <div class="select-wrapper">
+                    <select id="dob-day" name="owner_dob_day">
+                      <option value="" disabled selected>Day</option>
+                      <!-- JS will populate days dynamically -->
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="error-message col-span-full" id="error-dob">Please select a valid date of birth.</div>
+
+              <!-- Owner Gender Block -->
+              <div class="form-group col-span-full">
+                <h3 class="subsection-title" style="margin-top: 0;">What is the owner’s gender?</h3>
+                <div class="gender-btn-group">
+                  <button type="button" class="gender-btn" data-gender="Male">Male</button>
+                  <button type="button" class="gender-btn" data-gender="Female">Female</button>
+                  <input type="hidden" id="owner-gender" name="owner_gender" value="">
+                </div>
+                <div class="error-message" id="error-gender">Please select a gender.</div>
+              </div>
+
+            </div>
+          </div>
+          
+          <!-- Bottom Navigation Buttons -->
+          <div class="step-navigation">
+            <button type="button" class="btn btn-secondary btn-back" data-back-target="3">
+              <span class="btn-arrow">&larr;</span> Back
+            </button>
+            <a href="#" class="help-link">Help?</a>
+            <button type="button" class="btn btn-primary btn-next" data-next-target="5">
+              Confirm &amp; Continue <span class="btn-arrow">&rarr;</span>
+            </button>
+          </div>
+        </section>
+
+        <!-- Step 5: Contact Information -->
+        <section id="step-5" class="step-card">
+          <div class="step-header">
+            <h2 class="step-question">Contact Information</h2>
+            <p class="step-instruction">Enter your contact details to save your quote progress.</p>
+          </div>
+          
+          <div class="step-body">
+            <div class="form-group">
+              <label for="contact-phone" class="field-label">Phone Number</label>
+              <input type="text" id="contact-phone" name="contact_phone" placeholder="(647) 801-2677" maxlength="14">
+              <p class="field-subtext">Enter the business phone number</p>
+              <div class="error-message" id="error-phone">Please enter a valid 10-digit phone number.</div>
+            </div>
+            
+            <div class="form-group">
+              <label for="contact-email" class="field-label">Email Address</label>
+              <input type="text" id="contact-email" name="contact_email" placeholder="test@test.com">
+              <p class="field-subtext">Enter an email address</p>
+              <div class="error-message" id="error-email">Please enter a valid email address.</div>
+            </div>
+
+            <div class="privacy-callout-card">
+              <p class="privacy-text">
+                Your contact details will help save and retrieve the quote for a later time.
+              </p>
+              <p class="privacy-consent-text">
+                Clicking on "Confirm &amp; Continue" means that you agree that we may collect, use and disclose information about yourself, your business and other individuals to provide you with a quote, to provide ongoing services, assess risk, set premiums, comply with legal and regulatory requirements, and for other purposes described in the <a href="#" class="privacy-link">Privacy Policy</a>. If you give us information about other people, you confirm that you have obtained their consent.
+              </p>
+            </div>
+          </div>
+          
+          <!-- Bottom Navigation Buttons -->
+          <div class="step-navigation">
+            <button type="button" class="btn btn-secondary btn-back" data-back-target="4">
+              <span class="btn-arrow">&larr;</span> Back
+            </button>
+            <a href="#" class="help-link">Help?</a>
+            <button type="button" class="btn btn-primary btn-next" data-next-target="6">
+              Confirm &amp; Continue <span class="btn-arrow">&rarr;</span>
+            </button>
+          </div>
+        </section>
+
+        <!-- Step 6: About your business -->
+        <section id="step-6" class="step-card">
+          <div class="step-header">
+            <h2 class="step-question">About your business</h2>
+            <p class="step-instruction">We'll ask a few quick questions about your business. Your answers help us provide the best offer.</p>
+          </div>
+          
+          <div class="step-body">
+            <div class="form-group">
+              <label class="field-label">Does your business operate from home?</label>
+              <div class="toggle-btn-group">
+                <button type="button" class="toggle-btn" data-field="business-home" data-value="Yes">Yes</button>
+                <button type="button" class="toggle-btn" data-field="business-home" data-value="No">No</button>
+                <input type="hidden" id="business-home" name="business_home" value="">
+              </div>
+              <div class="error-message" id="error-business-home">Please select whether your business operates from home.</div>
+            </div>
+          </div>
+          
+          <!-- Bottom Navigation Buttons -->
+          <div class="step-navigation">
+            <button type="button" class="btn btn-secondary btn-back" data-back-target="5">
+              <span class="btn-arrow">&larr;</span> Back
+            </button>
+            <a href="#" class="help-link">Help?</a>
+            <button type="button" class="btn btn-primary btn-next" data-next-target="7">
+              Confirm &amp; Continue <span class="btn-arrow">&rarr;</span>
+            </button>
+          </div>
+        </section>
+
+        <!-- Step 7: Establishment Year -->
+        <section id="step-7" class="step-card">
+          <div class="step-header">
+            <h2 class="step-question">What year was the business established?</h2>
+            <p class="step-instruction">What year was the business established (by you or a previous owner)?</p>
+          </div>
+          
+          <div class="step-body">
+            <div class="form-group">
+              <label for="business-established-year" class="field-label">Establishment Year</label>
+              <input type="text" id="business-established-year" name="business_established_year" placeholder="Enter the year" maxlength="4">
+              <p class="field-subtext">e.g., 2020</p>
+              <div class="error-message" id="error-established-year">Please enter a valid establishment year (e.g. 1800 to present).</div>
+            </div>
+          </div>
+          
+          <!-- Bottom Navigation Buttons -->
+          <div class="step-navigation">
+            <button type="button" class="btn btn-secondary btn-back" data-back-target="6">
+              <span class="btn-arrow">&larr;</span> Back
+            </button>
+            <a href="#" class="help-link">Help?</a>
+            <button type="button" class="btn btn-primary btn-next" data-next-target="8">
+              Confirm &amp; Continue <span class="btn-arrow">&rarr;</span>
+            </button>
+          </div>
+        </section>
+
+        <!-- Step 8: Finances -->
+        <section id="step-8" class="step-card">
+          <div class="step-header">
+            <h2 class="step-question">Now, Let's Talk About Finances</h2>
+            <p class="step-instruction">What's the estimated gross annual revenue for the next 12 months?</p>
+          </div>
+          
+          <div class="step-body">
+            <div class="form-group">
+              <label for="business-revenue" class="field-label">Gross Annual Revenue</label>
+              <input type="text" id="business-revenue" name="business_revenue" placeholder="Enter the revenue">
+              <p class="field-subtext">e.g., $4,175,000</p>
+              <div class="error-message" id="error-revenue">Please enter a valid annual revenue.</div>
+            </div>
+          </div>
+          
+          <!-- Bottom Navigation Buttons -->
+          <div class="step-navigation">
+            <button type="button" class="btn btn-secondary btn-back" data-back-target="7">
+              <span class="btn-arrow">&larr;</span> Back
+            </button>
+            <a href="#" class="help-link">Help?</a>
+            <button type="button" class="btn btn-primary btn-next" data-next-target="9">
+              Confirm &amp; Continue <span class="btn-arrow">&rarr;</span>
+            </button>
+          </div>
+        </section>
+
+        <!-- Step 9: Canadian Revenue -->
+        <section id="step-9" class="step-card">
+          <div class="step-header">
+            <h2 class="step-question">Revenues</h2>
+            <p class="step-instruction">Is all the business revenue from Canada?</p>
+          </div>
+          
+          <div class="step-body">
+            <div class="form-group">
+              <label class="field-label">Is all the business revenue from Canada?</label>
+              <div class="toggle-btn-group">
+                <button type="button" class="toggle-btn" data-field="revenue-canada" data-value="Yes">Yes</button>
+                <button type="button" class="toggle-btn" data-field="revenue-canada" data-value="No">No</button>
+                <input type="hidden" id="revenue-canada" name="revenue_canada" value="">
+              </div>
+              <div class="error-message" id="error-revenue-canada">Please select whether all revenue is from Canada.</div>
+            </div>
+          </div>
+          
+          <!-- Bottom Navigation Buttons -->
+          <div class="step-navigation">
+            <button type="button" class="btn btn-secondary btn-back" data-back-target="8">
+              <span class="btn-arrow">&larr;</span> Back
+            </button>
+            <a href="#" class="help-link">Help?</a>
+            <button type="submit" class="btn btn-primary btn-submit">
+              Submit Application <span class="btn-arrow">&check;</span>
+            </button>
+          </div>
+        </section>
+
+      </form>
+
+      <!-- Step 5 (Success/Confirmation screen) -->
+      <div id="success-screen" class="success-card hidden">
+        <div class="success-icon-container">
+          <div class="success-checkmark">✓</div>
+        </div>
+        <h2 class="success-title">Thank You!</h2>
+        <p class="success-lead">Your commercial insurance quote request has been submitted successfully.</p>
+        
+        <div class="summary-box">
+          <h3 class="summary-title">Quote Summary</h3>
+          <div class="summary-details" id="summary-content">
+            <!-- Filled dynamically by JavaScript -->
+          </div>
+        </div>
+        
+        <button type="button" class="btn btn-primary" id="btn-restart">
+          Start New Quote
+        </button>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="form-footer">
+    <div class="footer-container">
+      <p>&copy; 2026 Red Shield Insurance. Inspired by commercial insurance quoting systems. All rights reserved.</p>
+      <p class="footer-links">
+        <a href="#">Privacy &amp; Security</a> | <a href="#">Terms of Use</a> | <a href="#">Legal Info</a>
+      </p>
+    </div>
+  </footer>
+
+  <!-- Help Modal -->
+  <div id="help-modal" class="modal-overlay hidden" aria-modal="true" role="dialog">
+    <div class="modal-card">
+      <button type="button" class="modal-close-btn" id="close-modal-btn" aria-label="Close Help Modal">&times;</button>
+      <div class="modal-header">
+        <span class="modal-icon">💡</span>
+        <h3 class="modal-title">Need Assistance?</h3>
+      </div>
+      <div class="modal-body">
+        <p class="modal-intro">We are here to help you get the right coverage for your business.</p>
+        
+        <div class="help-section">
+          <h4>📞 Speak to an Insurance Agent</h4>
+          <p>Have questions about your coverage or this form? Call us toll-free:</p>
+          <a href="tel:1-833-699-0452" class="help-phone-btn">Call 1-833-699-0452</a>
+          <span class="help-hours">Hours: Monday to Friday, 8:00 AM – 8:00 PM EST</span>
+        </div>
+
+        <div class="help-faq-section">
+          <h4>💬 Frequently Asked Questions</h4>
+          
+          <div class="faq-item">
+            <h5 class="faq-question">What date should I choose for coverage? <span class="faq-toggle">+</span></h5>
+            <div class="faq-answer hidden">
+              <p>You can choose any start date from today up to 90 days in the future. Coverage cannot be backdated.</p>
+            </div>
+          </div>
+          
+          <div class="faq-item">
+            <h5 class="faq-question">Why is my profession required? <span class="faq-toggle">+</span></h5>
+            <div class="faq-answer hidden">
+              <p>Different industries have different risk profiles. This helps us tailor the general liability and property coverage specifically for your business activities.</p>
+            </div>
+          </div>
+          
+          <div class="faq-item">
+            <h5 class="faq-question">What if I don't see my industry? <span class="faq-toggle">+</span></h5>
+            <div class="faq-answer hidden">
+              <p>If your specific industry isn't in the auto-suggestions, try typing a broader category (e.g. "Retail" instead of a specific item). If you still can't find it, please call us to complete your quote.</p>
+            </div>
+          </div>
+          
+          <div class="faq-item">
+            <h5 class="faq-question">Why do you need my Date of Birth &amp; Gender? <span class="faq-toggle">+</span></h5>
+            <div class="faq-answer hidden">
+              <p>This information is used strictly to verify identity and assess eligibility under standard commercial underwriting criteria in Canada.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" id="close-modal-footer-btn">Got it, close</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
