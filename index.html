@@ -40,6 +40,9 @@
         <span id="current-step-title" class="progress-title-text">Getting Started</span>
       </div>
       <div class="progress-right">
+        <span class="secure-badge">
+          <span class="secure-icon">🔒</span> Secure application
+        </span>
       </div>
     </div>
     <!-- Visual Progress Line -->
@@ -63,9 +66,11 @@
           
           <div class="step-body">
             <div class="form-group date-picker-group">
-              <label for="coverage-date-input" class="field-label">Coverage Start Date</label>
-              <div class="input-with-icon">
-                <input type="text" id="coverage-date-input" name="coverage_start_date" placeholder="Select coverage start date" readonly>
+              <div class="input-wrapper input-with-icon">
+                <div class="input-inner">
+                  <label for="coverage-date-input" class="field-label">Coverage Start Date</label>
+                  <input type="text" id="coverage-date-input" name="coverage_start_date" placeholder="Select coverage start date" readonly>
+                </div>
                 <button type="button" class="input-icon-btn" id="calendar-toggle-btn" aria-label="Open Calendar">
                   📅
                 </button>
@@ -92,13 +97,15 @@
           
           <!-- Bottom Navigation Buttons -->
           <div class="step-navigation">
-            <button type="button" class="btn btn-secondary btn-back" disabled style="opacity: 0.5; cursor: not-allowed;">
-              <span class="btn-arrow">&larr;</span> Back
-            </button>
-            <a href="#" class="help-link">Help?</a>
             <button type="button" class="btn btn-primary btn-next" data-next-target="2">
-              Confirm &amp; Continue <span class="btn-arrow">&rarr;</span>
+              Confirm &amp; Continue
             </button>
+            <div class="navigation-links">
+              <button type="button" class="btn-link btn-back" disabled style="opacity: 0.5; cursor: not-allowed; display: none;">
+                ← Back
+              </button>
+              <a href="#" class="help-link">Help?</a>
+            </div>
           </div>
         </section>
 
@@ -111,9 +118,11 @@
           
           <div class="step-body">
             <div class="form-group searchable-select-group">
-              <label for="industry-search-input" class="field-label">Profession or Industry</label>
-              <div class="input-with-icon">
-                <input type="text" id="industry-search-input" name="profession_industry" placeholder="Search profession (e.g. Consultant, Retail...)" autocomplete="off">
+              <div class="input-wrapper input-with-icon">
+                <div class="input-inner">
+                  <label for="industry-search-input" class="field-label">Profession or Industry</label>
+                  <input type="text" id="industry-search-input" name="profession_industry" placeholder="Search profession (e.g. Consultant, Retail...)" autocomplete="off">
+                </div>
                 <span class="select-chevron">▼</span>
               </div>
               <p class="field-subtext">E.g. Construction Contractor, Consultant, Retail, etc.</p>
@@ -128,13 +137,15 @@
           
           <!-- Bottom Navigation Buttons -->
           <div class="step-navigation">
-            <button type="button" class="btn btn-secondary btn-back" data-back-target="1">
-              <span class="btn-arrow">&larr;</span> Back
-            </button>
-            <a href="#" class="help-link">Help?</a>
             <button type="button" class="btn btn-primary btn-next" data-next-target="3">
-              Confirm &amp; Continue <span class="btn-arrow">&rarr;</span>
+              Confirm &amp; Continue
             </button>
+            <div class="navigation-links">
+              <button type="button" class="btn-link btn-back" data-back-target="1">
+                ← Back
+              </button>
+              <a href="#" class="help-link">Help?</a>
+            </div>
           </div>
         </section>
 
@@ -149,20 +160,24 @@
             <div class="address-fields-grid">
               
               <div class="form-group col-span-full">
-                <label for="business-address" class="field-label">Business Address</label>
-                <input type="text" id="business-address" name="business_address" placeholder="Enter the business address">
+                <div class="input-wrapper">
+                  <label for="business-address" class="field-label">Business Address</label>
+                  <input type="text" id="business-address" name="business_address" placeholder="Enter the business address">
+                </div>
                 <div class="error-message" id="error-address">Please enter the business address.</div>
               </div>
               
               <div class="form-group">
-                <label for="business-city" class="field-label">City</label>
-                <input type="text" id="business-city" name="business_city" placeholder="Enter city">
+                <div class="input-wrapper">
+                  <label for="business-city" class="field-label">City</label>
+                  <input type="text" id="business-city" name="business_city" placeholder="Enter city">
+                </div>
                 <div class="error-message" id="error-city">Please enter the city.</div>
               </div>
               
               <div class="form-group">
-                <label for="business-province" class="field-label">Province</label>
-                <div class="select-wrapper">
+                <div class="input-wrapper">
+                  <label for="business-province" class="field-label">Province</label>
                   <select id="business-province" name="business_province">
                     <option value="" disabled selected>Select Province</option>
                     <option value="AB">Alberta</option>
@@ -184,8 +199,10 @@
               </div>
               
               <div class="form-group">
-                <label for="business-postal" class="field-label">Postal Code</label>
-                <input type="text" id="business-postal" name="business_postal_code" placeholder="A1A 1A1" maxlength="7">
+                <div class="input-wrapper">
+                  <label for="business-postal" class="field-label">Postal Code</label>
+                  <input type="text" id="business-postal" name="business_postal_code" placeholder="A1A 1A1" maxlength="7">
+                </div>
                 <div class="error-message" id="error-postal">Please enter a valid Canadian postal code (e.g. M5V 2T6).</div>
               </div>
               
@@ -194,13 +211,15 @@
           
           <!-- Bottom Navigation Buttons -->
           <div class="step-navigation">
-            <button type="button" class="btn btn-secondary btn-back" data-back-target="2">
-              <span class="btn-arrow">&larr;</span> Back
-            </button>
-            <a href="#" class="help-link">Help?</a>
             <button type="button" class="btn btn-primary btn-next" data-next-target="4">
-              Confirm &amp; Continue <span class="btn-arrow">&rarr;</span>
+              Confirm &amp; Continue
             </button>
+            <div class="navigation-links">
+              <button type="button" class="btn-link btn-back" data-back-target="2">
+                ← Back
+              </button>
+              <a href="#" class="help-link">Help?</a>
+            </div>
           </div>
         </section>
 
@@ -215,23 +234,29 @@
             <div class="owner-fields-grid">
               
               <!-- Owner Name Block -->
-              <h3 class="subsection-title">What's the business owner's name?</h3>
+              <h3 class="subsection-title col-span-full">What's the business owner's name?</h3>
               
               <div class="form-group">
-                <label for="owner-first-name" class="field-label">First Name</label>
-                <input type="text" id="owner-first-name" name="owner_first_name" placeholder="First name">
+                <div class="input-wrapper">
+                  <label for="owner-first-name" class="field-label">First Name</label>
+                  <input type="text" id="owner-first-name" name="owner_first_name" placeholder="First name">
+                </div>
                 <div class="error-message" id="error-first-name">Please enter the first name.</div>
               </div>
               
               <div class="form-group">
-                <label for="owner-last-name" class="field-label">Last Name</label>
-                <input type="text" id="owner-last-name" name="owner_last_name" placeholder="Last name">
+                <div class="input-wrapper">
+                  <label for="owner-last-name" class="field-label">Last Name</label>
+                  <input type="text" id="owner-last-name" name="owner_last_name" placeholder="Last name">
+                </div>
                 <div class="error-message" id="error-last-name">Please enter the last name.</div>
               </div>
               
               <div class="form-group col-span-full">
-                <label for="owner-preferred-name" class="field-label">Preferred Name (Optional)</label>
-                <input type="text" id="owner-preferred-name" name="owner_preferred_name" placeholder="Add preferred name">
+                <div class="input-wrapper">
+                  <label for="owner-preferred-name" class="field-label">Preferred Name (Optional)</label>
+                  <input type="text" id="owner-preferred-name" name="owner_preferred_name" placeholder="Add preferred name">
+                </div>
               </div>
 
               <!-- Owner DOB Block -->
@@ -239,8 +264,8 @@
               
               <div class="dob-group col-span-full">
                 <div class="form-group">
-                  <label for="dob-year" class="field-label">Year</label>
-                  <div class="select-wrapper">
+                  <div class="input-wrapper">
+                    <label for="dob-year" class="field-label">Year</label>
                     <select id="dob-year" name="owner_dob_year">
                       <option value="" disabled selected>Year</option>
                       <!-- JS will populate years -->
@@ -249,8 +274,8 @@
                 </div>
                 
                 <div class="form-group">
-                  <label for="dob-month" class="field-label">Month</label>
-                  <div class="select-wrapper">
+                  <div class="input-wrapper">
+                    <label for="dob-month" class="field-label">Month</label>
                     <select id="dob-month" name="owner_dob_month">
                       <option value="" disabled selected>Month</option>
                       <option value="0">January</option>
@@ -270,8 +295,8 @@
                 </div>
                 
                 <div class="form-group">
-                  <label for="dob-day" class="field-label">Day</label>
-                  <div class="select-wrapper">
+                  <div class="input-wrapper">
+                    <label for="dob-day" class="field-label">Day</label>
                     <select id="dob-day" name="owner_dob_day">
                       <option value="" disabled selected>Day</option>
                       <!-- JS will populate days dynamically -->
@@ -283,7 +308,7 @@
 
               <!-- Owner Gender Block -->
               <div class="form-group col-span-full">
-                <h3 class="subsection-title" style="margin-top: 0;">What is the owner’s gender?</h3>
+                <h3 class="subsection-title col-span-full" style="margin-top: 0; margin-bottom: 12px;">What is the owner’s gender?</h3>
                 <div class="gender-btn-group">
                   <button type="button" class="gender-btn" data-gender="Male">Male</button>
                   <button type="button" class="gender-btn" data-gender="Female">Female</button>
@@ -297,13 +322,15 @@
           
           <!-- Bottom Navigation Buttons -->
           <div class="step-navigation">
-            <button type="button" class="btn btn-secondary btn-back" data-back-target="3">
-              <span class="btn-arrow">&larr;</span> Back
-            </button>
-            <a href="#" class="help-link">Help?</a>
             <button type="button" class="btn btn-primary btn-next" data-next-target="5">
-              Confirm &amp; Continue <span class="btn-arrow">&rarr;</span>
+              Confirm &amp; Continue
             </button>
+            <div class="navigation-links">
+              <button type="button" class="btn-link btn-back" data-back-target="3">
+                ← Back
+              </button>
+              <a href="#" class="help-link">Help?</a>
+            </div>
           </div>
         </section>
 
@@ -316,15 +343,19 @@
           
           <div class="step-body">
             <div class="form-group">
-              <label for="contact-phone" class="field-label">Phone Number</label>
-              <input type="text" id="contact-phone" name="contact_phone" placeholder="(647) 801-2677" maxlength="14">
+              <div class="input-wrapper">
+                <label for="contact-phone" class="field-label">Phone Number</label>
+                <input type="text" id="contact-phone" name="contact_phone" placeholder="(647) 801-2677" maxlength="14">
+              </div>
               <p class="field-subtext">Enter the business phone number</p>
               <div class="error-message" id="error-phone">Please enter a valid 10-digit phone number.</div>
             </div>
             
             <div class="form-group">
-              <label for="contact-email" class="field-label">Email Address</label>
-              <input type="text" id="contact-email" name="contact_email" placeholder="test@test.com">
+              <div class="input-wrapper">
+                <label for="contact-email" class="field-label">Email Address</label>
+                <input type="text" id="contact-email" name="contact_email" placeholder="test@test.com">
+              </div>
               <p class="field-subtext">Enter an email address</p>
               <div class="error-message" id="error-email">Please enter a valid email address.</div>
             </div>
@@ -341,13 +372,15 @@
           
           <!-- Bottom Navigation Buttons -->
           <div class="step-navigation">
-            <button type="button" class="btn btn-secondary btn-back" data-back-target="4">
-              <span class="btn-arrow">&larr;</span> Back
-            </button>
-            <a href="#" class="help-link">Help?</a>
             <button type="button" class="btn btn-primary btn-next" data-next-target="6">
-              Confirm &amp; Continue <span class="btn-arrow">&rarr;</span>
+              Confirm &amp; Continue
             </button>
+            <div class="navigation-links">
+              <button type="button" class="btn-link btn-back" data-back-target="4">
+                ← Back
+              </button>
+              <a href="#" class="help-link">Help?</a>
+            </div>
           </div>
         </section>
 
@@ -360,7 +393,7 @@
           
           <div class="step-body">
             <div class="form-group">
-              <label class="field-label">Does your business operate from home?</label>
+              <label class="field-label" style="text-transform: none; font-size: 16px; font-weight: 600; margin-bottom: 12px; display: block; color: var(--text-dark);">Does your business operate from home?</label>
               <div class="toggle-btn-group">
                 <button type="button" class="toggle-btn" data-field="business-home" data-value="Yes">Yes</button>
                 <button type="button" class="toggle-btn" data-field="business-home" data-value="No">No</button>
@@ -372,13 +405,15 @@
           
           <!-- Bottom Navigation Buttons -->
           <div class="step-navigation">
-            <button type="button" class="btn btn-secondary btn-back" data-back-target="5">
-              <span class="btn-arrow">&larr;</span> Back
-            </button>
-            <a href="#" class="help-link">Help?</a>
             <button type="button" class="btn btn-primary btn-next" data-next-target="7">
-              Confirm &amp; Continue <span class="btn-arrow">&rarr;</span>
+              Confirm &amp; Continue
             </button>
+            <div class="navigation-links">
+              <button type="button" class="btn-link btn-back" data-back-target="5">
+                ← Back
+              </button>
+              <a href="#" class="help-link">Help?</a>
+            </div>
           </div>
         </section>
 
@@ -391,8 +426,10 @@
           
           <div class="step-body">
             <div class="form-group">
-              <label for="business-established-year" class="field-label">Establishment Year</label>
-              <input type="text" id="business-established-year" name="business_established_year" placeholder="Enter the year" maxlength="4">
+              <div class="input-wrapper">
+                <label for="business-established-year" class="field-label">Establishment Year</label>
+                <input type="text" id="business-established-year" name="business_established_year" placeholder="Enter the year" maxlength="4">
+              </div>
               <p class="field-subtext">e.g., 2020</p>
               <div class="error-message" id="error-established-year">Please enter a valid establishment year (e.g. 1800 to present).</div>
             </div>
@@ -400,13 +437,15 @@
           
           <!-- Bottom Navigation Buttons -->
           <div class="step-navigation">
-            <button type="button" class="btn btn-secondary btn-back" data-back-target="6">
-              <span class="btn-arrow">&larr;</span> Back
-            </button>
-            <a href="#" class="help-link">Help?</a>
             <button type="button" class="btn btn-primary btn-next" data-next-target="8">
-              Confirm &amp; Continue <span class="btn-arrow">&rarr;</span>
+              Confirm &amp; Continue
             </button>
+            <div class="navigation-links">
+              <button type="button" class="btn-link btn-back" data-back-target="6">
+                ← Back
+              </button>
+              <a href="#" class="help-link">Help?</a>
+            </div>
           </div>
         </section>
 
@@ -419,8 +458,10 @@
           
           <div class="step-body">
             <div class="form-group">
-              <label for="business-revenue" class="field-label">Gross Annual Revenue</label>
-              <input type="text" id="business-revenue" name="business_revenue" placeholder="Enter the revenue">
+              <div class="input-wrapper">
+                <label for="business-revenue" class="field-label">Gross Annual Revenue</label>
+                <input type="text" id="business-revenue" name="business_revenue" placeholder="Enter the revenue">
+              </div>
               <p class="field-subtext">e.g., $4,175,000</p>
               <div class="error-message" id="error-revenue">Please enter a valid annual revenue.</div>
             </div>
@@ -428,13 +469,15 @@
           
           <!-- Bottom Navigation Buttons -->
           <div class="step-navigation">
-            <button type="button" class="btn btn-secondary btn-back" data-back-target="7">
-              <span class="btn-arrow">&larr;</span> Back
-            </button>
-            <a href="#" class="help-link">Help?</a>
             <button type="button" class="btn btn-primary btn-next" data-next-target="9">
-              Confirm &amp; Continue <span class="btn-arrow">&rarr;</span>
+              Confirm &amp; Continue
             </button>
+            <div class="navigation-links">
+              <button type="button" class="btn-link btn-back" data-back-target="7">
+                ← Back
+              </button>
+              <a href="#" class="help-link">Help?</a>
+            </div>
           </div>
         </section>
 
@@ -447,7 +490,7 @@
           
           <div class="step-body">
             <div class="form-group">
-              <label class="field-label">Is all the business revenue from Canada?</label>
+              <label class="field-label" style="text-transform: none; font-size: 16px; font-weight: 600; margin-bottom: 12px; display: block; color: var(--text-dark);">Is all the business revenue from Canada?</label>
               <div class="toggle-btn-group">
                 <button type="button" class="toggle-btn" data-field="revenue-canada" data-value="Yes">Yes</button>
                 <button type="button" class="toggle-btn" data-field="revenue-canada" data-value="No">No</button>
@@ -459,19 +502,21 @@
           
           <!-- Bottom Navigation Buttons -->
           <div class="step-navigation">
-            <button type="button" class="btn btn-secondary btn-back" data-back-target="8">
-              <span class="btn-arrow">&larr;</span> Back
-            </button>
-            <a href="#" class="help-link">Help?</a>
             <button type="submit" class="btn btn-primary btn-submit">
-              Submit Application <span class="btn-arrow">&check;</span>
+              Submit Application
             </button>
+            <div class="navigation-links">
+              <button type="button" class="btn-link btn-back" data-back-target="8">
+                ← Back
+              </button>
+              <a href="#" class="help-link">Help?</a>
+            </div>
           </div>
         </section>
 
       </form>
 
-      <!-- Step 5 (Success/Confirmation screen) -->
+      <!-- Success/Confirmation screen -->
       <div id="success-screen" class="success-card hidden">
         <div class="success-icon-container">
           <div class="success-checkmark">✓</div>
