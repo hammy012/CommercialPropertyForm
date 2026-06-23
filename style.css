@@ -680,15 +680,15 @@ body {
   color: var(--primary-hover);
 }
 
-/* Navigation Actions (Centered, clean flat buttons) */
+/* Navigation Actions - Single row: Back (left) | Help (center) | Confirm (right) */
 .step-navigation {
   margin-top: 40px;
   padding-top: 24px;
   border-top: 1px solid var(--border-color);
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
-  gap: 16px;
+  justify-content: space-between;
   max-width: 480px;
   margin-left: auto;
   margin-right: auto;
@@ -697,7 +697,7 @@ body {
 
 .btn {
   font-family: var(--font-sans);
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 700;
   border-radius: var(--border-radius);
   cursor: pointer;
@@ -706,9 +706,8 @@ body {
   align-items: center;
   justify-content: center;
   transition: var(--transition-smooth);
-  width: 100%;
-  max-width: 240px; /* Centered narrow button like TD's layout */
-  padding: 14px 28px;
+  padding: 12px 24px;
+  white-space: nowrap;
 }
 
 .btn-primary {
@@ -725,29 +724,42 @@ body {
   transform: translateY(1px);
 }
 
-/* Center Back & Help Links below */
+/* Help link in center of nav row */
 .navigation-links {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 16px;
+  flex: 1;
 }
 
+/* Back button - outlined/bordered style */
 .btn-link {
   background: none;
-  border: none;
+  border: 1px solid var(--border-color);
   color: var(--text-medium);
   font-family: var(--font-sans);
   font-size: 14px;
   font-weight: 700;
   cursor: pointer;
-  text-decoration: underline;
-  padding: 4px 8px;
+  text-decoration: none;
+  padding: 10px 20px;
+  border-radius: var(--border-radius);
   transition: var(--transition-smooth);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
 }
 
 .btn-link:hover {
+  border-color: var(--primary-color);
   color: var(--primary-color);
+  background-color: var(--primary-light);
+}
+
+.btn-link:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  pointer-events: none;
 }
 
 .help-link {
