@@ -391,7 +391,8 @@ body {
 .custom-calendar-popup {
   position: absolute;
   top: 100%;
-  left: 0;
+  left: 50%;
+  transform: translateX(-50%);
   margin-top: 8px;
   width: 100%;
   max-width: 320px;

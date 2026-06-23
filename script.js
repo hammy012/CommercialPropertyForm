@@ -123,7 +123,19 @@ document.addEventListener('DOMContentLoaded', () => {
   function adjustWrapperHeight() {
     const activeCard = document.getElementById(`step-${currentStep}`);
     if (activeCard && wrapper) {
-      wrapper.style.height = `${activeCard.offsetHeight}px`;
+      let extraHeight = 0;
+      if (currentStep === 1) {
+        const cal = document.getElementById('custom-calendar');
+        if (cal && !cal.classList.contains('hidden')) {
+          extraHeight = cal.offsetHeight + 16;
+        }
+      } else if (currentStep === 2) {
+        const dropdown = document.getElementById('industry-dropdown');
+        if (dropdown && !dropdown.classList.contains('hidden')) {
+          extraHeight = dropdown.offsetHeight + 16;
+        }
+      }
+      wrapper.style.height = `${activeCard.offsetHeight + extraHeight}px`;
     }
   }
 
