@@ -1128,67 +1128,129 @@ body {
 /* Responsiveness (Mobile layout adjustments) */
 @media (max-width: 768px) {
   .sticky-header {
-    height: 60px;
+    height: 52px;
+    border-top-width: 3px;
   }
-  
+
   .header-container {
-    padding: 0 16px;
+    padding: 0 12px;
+    gap: 8px;
   }
-  
+
+  .header-logo {
+    flex: 0 0 auto; /* don't stretch */
+  }
+
   .logo-img {
-    max-height: 34px;
+    max-height: 28px;
   }
-  
+
   .header-title {
     display: none; /* Hide middle title on phone screen */
   }
-  
+
+  /* Show only phone icon + number in compact form */
+  .phone-link {
+    font-size: 12px;
+    font-weight: 600;
+  }
+
+  .phone-icon {
+    font-size: 12px;
+    margin-right: 4px;
+  }
+
+  .phone-arrow {
+    display: none;
+  }
+
+  /* Progress subheader adjustments */
   .progress-subheader {
-    top: 60px;
+    top: 52px;
   }
-  
+
   .progress-container {
-    padding: 0 16px 8px 16px;
+    padding: 0 12px 8px 12px;
   }
-  
+
+  .progress-left {
+    font-size: 12px;
+  }
+
+  .secure-badge {
+    font-size: 11px;
+  }
+
   .main-content {
-    padding: 40px 16px 60px 16px;
+    padding: 32px 16px 60px 16px;
   }
-  
+
   .step-question {
-    font-size: 24px;
+    font-size: 22px;
   }
-  
+
   .step-instruction {
     font-size: 14px;
   }
-  
-  .address-fields-grid, 
+
+  .address-fields-grid,
   .owner-fields-grid {
     grid-template-columns: 1fr;
     gap: 16px;
   }
-  
+
   .col-span-full {
     grid-column: span 1;
   }
-  
+
   .subsection-title {
     grid-column: span 1;
     font-size: 16px;
   }
-  
+
   .dob-group {
     grid-template-columns: 1fr 1.2fr 1fr;
     gap: 8px;
   }
-  
+
+  /* Navigation row on mobile */
   .step-navigation {
-    margin-top: 30px;
+    margin-top: 28px;
     padding-top: 16px;
+    gap: 8px;
   }
-  
+
   .btn {
-    max-width: 100%; /* Buttons take full width on phone screens */
+    font-size: 13px;
+    padding: 11px 16px;
+  }
+
+  .btn-link {
+    font-size: 12px;
+    padding: 8px 12px;
+  }
+
+  .help-link {
+    font-size: 12px;
+  }
+}
+
+/* Extra small phones */
+@media (max-width: 380px) {
+  .phone-number {
+    display: none; /* Only show phone icon on very small screens */
+  }
+
+  .phone-icon {
+    margin-right: 0;
+  }
+
+  .logo-img {
+    max-height: 24px;
+  }
+
+  .btn {
+    font-size: 12px;
+    padding: 10px 12px;
   }
 }
