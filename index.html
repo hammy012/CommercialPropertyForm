@@ -401,6 +401,33 @@
               </div>
               <div class="error-message" id="error-business-home">Please select whether your business operates from home.</div>
             </div>
+
+            <!-- Conditional: Business Location Questions (shown when No is selected) -->
+            <div id="business-location-questions" class="conditional-section hidden">
+
+              <div class="form-group">
+                <label class="field-label" style="text-transform: none; font-size: 16px; font-weight: 600; margin-bottom: 12px; display: block; color: var(--text-dark);">What type of location is your business in?</label>
+                <div class="radio-card-group">
+                  <button type="button" class="radio-card-btn" data-field="business-location-type" data-value="Office Building">🏢 Office Building</button>
+                  <button type="button" class="radio-card-btn" data-field="business-location-type" data-value="Retail / Storefront">🛍️ Retail / Storefront</button>
+                  <button type="button" class="radio-card-btn" data-field="business-location-type" data-value="Industrial / Warehouse">🏭 Industrial / Warehouse</button>
+                  <button type="button" class="radio-card-btn" data-field="business-location-type" data-value="Other">📍 Other</button>
+                  <input type="hidden" id="business-location-type" name="business_location_type" value="">
+                </div>
+                <div class="error-message" id="error-location-type">Please select your business location type.</div>
+              </div>
+
+              <div class="form-group">
+                <label class="field-label" style="text-transform: none; font-size: 16px; font-weight: 600; margin-bottom: 12px; display: block; color: var(--text-dark);">Do you own or lease your business premises?</label>
+                <div class="toggle-btn-group">
+                  <button type="button" class="toggle-btn" data-field="business-premises" data-value="Own">Own</button>
+                  <button type="button" class="toggle-btn" data-field="business-premises" data-value="Lease">Lease</button>
+                  <input type="hidden" id="business-premises" name="business_premises" value="">
+                </div>
+                <div class="error-message" id="error-business-premises">Please select whether you own or lease your premises.</div>
+              </div>
+
+            </div>
           </div>
           
           <!-- Bottom Navigation Buttons -->
@@ -458,12 +485,25 @@
           
           <div class="step-body">
             <div class="form-group">
-              <div class="input-wrapper">
-                <label for="business-revenue" class="field-label">Gross Annual Revenue</label>
-                <input type="text" id="business-revenue" name="business_revenue" placeholder="Enter the revenue">
+              <p class="field-subtext" style="margin-bottom: 24px;">Use the slider to select the nearest match in Canadian dollars.</p>
+
+              <!-- Revenue Slider -->
+              <div class="revenue-slider-container">
+                <input type="range" id="business-revenue-slider" min="0" max="5000000" step="25000" value="500000" class="revenue-slider">
+                <div class="slider-labels">
+                  <span>$0</span>
+                  <span>$5,000,000+</span>
+                </div>
               </div>
-              <p class="field-subtext">e.g., $4,175,000</p>
-              <div class="error-message" id="error-revenue">Please enter a valid annual revenue.</div>
+
+              <!-- Revenue Display Box -->
+              <div class="revenue-display-box">
+                <span class="revenue-display-label">Estimated gross annual revenue</span>
+                <span class="revenue-display-value" id="revenue-display-value">$500,000</span>
+              </div>
+
+              <input type="hidden" id="business-revenue" name="business_revenue" value="500000">
+              <div class="error-message" id="error-revenue">Please select a revenue amount using the slider.</div>
             </div>
           </div>
           
@@ -497,6 +537,31 @@
                 <input type="hidden" id="revenue-canada" name="revenue_canada" value="">
               </div>
               <div class="error-message" id="error-revenue-canada">Please select whether all revenue is from Canada.</div>
+            </div>
+
+            <!-- Conditional: Non-Canada Revenue Questions (shown when No is selected) -->
+            <div id="non-canada-questions" class="conditional-section hidden">
+
+              <div class="form-group">
+                <label class="field-label" style="text-transform: none; font-size: 16px; font-weight: 600; margin-bottom: 12px; display: block; color: var(--text-dark);">What percentage of your revenue comes from the United States?</label>
+                <div class="input-wrapper">
+                  <label for="revenue-us-percent" class="field-label">US Revenue (%)</label>
+                  <input type="text" id="revenue-us-percent" name="revenue_us_percent" placeholder="e.g., 20" maxlength="3">
+                </div>
+                <p class="field-subtext">Enter a value between 0 and 100</p>
+                <div class="error-message" id="error-revenue-us">Please enter a valid percentage (0–100).</div>
+              </div>
+
+              <div class="form-group">
+                <label class="field-label" style="text-transform: none; font-size: 16px; font-weight: 600; margin-bottom: 12px; display: block; color: var(--text-dark);">What percentage of your revenue comes from other countries?</label>
+                <div class="input-wrapper">
+                  <label for="revenue-other-percent" class="field-label">Other International Revenue (%)</label>
+                  <input type="text" id="revenue-other-percent" name="revenue_other_percent" placeholder="e.g., 5" maxlength="3">
+                </div>
+                <p class="field-subtext">Enter a value between 0 and 100. US + Other combined must not exceed 100%.</p>
+                <div class="error-message" id="error-revenue-other">Please enter a valid percentage (0–100).</div>
+              </div>
+
             </div>
           </div>
           

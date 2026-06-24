@@ -370,6 +370,32 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('business-home').closest('.form-group').classList.remove('has-error');
         homeError.style.display = 'none';
       }
+
+      // If No selected, validate conditional fields
+      if (homeVal === 'No') {
+        const locationType = document.getElementById('business-location-type').value;
+        const locationError = document.getElementById('error-location-type');
+        if (!locationType) {
+          document.getElementById('business-location-type').closest('.form-group').classList.add('has-error');
+          locationError.style.display = 'block';
+          isValid = false;
+        } else {
+          document.getElementById('business-location-type').closest('.form-group').classList.remove('has-error');
+          locationError.style.display = 'none';
+        }
+
+        const premisesVal = document.getElementById('business-premises').value;
+        const premisesError = document.getElementById('error-business-premises');
+        if (!premisesVal) {
+          document.getElementById('business-premises').closest('.form-group').classList.add('has-error');
+          premisesError.style.display = 'block';
+          isValid = false;
+        } else {
+          document.getElementById('business-premises').closest('.form-group').classList.remove('has-error');
+          premisesError.style.display = 'none';
+        }
+      }
+      adjustWrapperHeight();
     }
     else if (stepNum === 7) {
       // Validate Established Year
@@ -384,15 +410,8 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
     else if (stepNum === 8) {
-      // Validate Revenue
-      const revenueInput = document.getElementById('business-revenue');
-      const revenue = revenueInput.value.trim();
-      if (!revenue || revenue === '$') {
-        showError('business-revenue', 'error-revenue', true);
-        isValid = false;
-      } else {
-        showError('business-revenue', 'error-revenue', false);
-      }
+      // Slider always has a value — just pass and hide any error
+      document.getElementById('error-revenue').style.display = 'none';
     }
     else if (stepNum === 9) {
       // Validate Canada Revenue
@@ -405,6 +424,32 @@ document.addEventListener('DOMContentLoaded', () => {
       } else {
         document.getElementById('revenue-canada').closest('.form-group').classList.remove('has-error');
         canadaError.style.display = 'none';
+      }
+
+      // If No selected, validate US% and Other%
+      if (canadaVal === 'No') {
+        const usPercent = parseInt(document.getElementById('revenue-us-percent').value);
+        const usError = document.getElementById('error-revenue-us');
+        if (isNaN(usPercent) || usPercent < 0 || usPercent > 100) {
+          document.getElementById('revenue-us-percent').closest('.form-group').classList.add('has-error');
+          usError.style.display = 'block';
+          isValid = false;
+        } else {
+          document.getElementById('revenue-us-percent').closest('.form-group').classList.remove('has-error');
+          usError.style.display = 'none';
+        }
+
+        const otherPercent = parseInt(document.getElementById('revenue-other-percent').value) || 0;
+        const otherError = document.getElementById('error-revenue-other');
+        const total = (isNaN(usPercent) ? 0 : usPercent) + otherPercent;
+        if (otherPercent < 0 || otherPercent > 100 || total > 100) {
+          document.getElementById('revenue-other-percent').closest('.form-group').classList.add('has-error');
+          otherError.style.display = 'block';
+          isValid = false;
+        } else {
+          document.getElementById('revenue-other-percent').closest('.form-group').classList.remove('has-error');
+          otherError.style.display = 'none';
+        }
       }
     }
 
@@ -454,19 +499,37 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Dynamic currency prefix/commas formatting for gross revenue (Step 8)
-  const businessRevenueInput = document.getElementById('business-revenue');
-  if (businessRevenueInput) {
-    businessRevenueInput.addEventListener('input', () => {
-      let clean = businessRevenueInput.value.replace(/\D/g, '');
-      if (clean) {
-        let num = parseInt(clean, 10);
-        businessRevenueInput.value = '$' + num.toLocaleString('en-US');
-        showError('business-revenue', 'error-revenue', false);
-      } else {
-        businessRevenueInput.value = '';
-      }
+  // ==========================================
+  // STEP 8: REVENUE SLIDER
+  // ==========================================
+  const revenueSlider = document.getElementById('business-revenue-slider');
+  const revenueDisplayValue = document.getElementById('revenue-display-value');
+  const revenueHiddenInput = document.getElementById('business-revenue');
+
+  function formatRevenue(val) {
+    const num = parseInt(val);
+    if (num >= 5000000) return '$5,000,000+';
+    return '$' + num.toLocaleString('en-CA');
+  }
+
+  function updateSliderTrack() {
+    const min = parseInt(revenueSlider.min);
+    const max = parseInt(revenueSlider.max);
+    const val = parseInt(revenueSlider.value);
+    const pct = ((val - min) / (max - min)) * 100;
+    revenueSlider.style.background = `linear-gradient(to right, var(--primary-color) ${pct}%, var(--border-color) ${pct}%)`;
+  }
+
+  if (revenueSlider) {
+    revenueSlider.addEventListener('input', () => {
+      const val = revenueSlider.value;
+      revenueDisplayValue.textContent = formatRevenue(val);
+      revenueHiddenInput.value = val;
+      document.getElementById('error-revenue').style.display = 'none';
+      updateSliderTrack();
     });
+    // Initialize track on load
+    updateSliderTrack();
   }
 
   // Digits filtering and error clearing for established year (Step 7)
@@ -504,8 +567,62 @@ document.addEventListener('DOMContentLoaded', () => {
         groupFormGroup.classList.remove('has-error');
         const errMsg = groupFormGroup.querySelector('.error-message');
         if (errMsg) errMsg.style.display = 'none';
+
+        // --- Conditional section logic ---
+        // Home Business "No" → show location questions
+        if (fieldId === 'business-home') {
+          const locationSection = document.getElementById('business-location-questions');
+          if (value === 'No') {
+            locationSection.classList.remove('hidden');
+          } else {
+            locationSection.classList.add('hidden');
+            // Reset hidden fields if toggled back to Yes
+            document.getElementById('business-location-type').value = '';
+            document.getElementById('business-premises').value = '';
+            document.querySelectorAll('.radio-card-btn').forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('[data-field="business-premises"]').forEach(b => b.classList.remove('active'));
+          }
+        }
+
+        // Canada Revenue "No" → show non-Canada % questions
+        if (fieldId === 'revenue-canada') {
+          const nonCanadaSection = document.getElementById('non-canada-questions');
+          if (value === 'No') {
+            nonCanadaSection.classList.remove('hidden');
+          } else {
+            nonCanadaSection.classList.add('hidden');
+            // Clear those fields if toggled back to Yes
+            if (document.getElementById('revenue-us-percent')) document.getElementById('revenue-us-percent').value = '';
+            if (document.getElementById('revenue-other-percent')) document.getElementById('revenue-other-percent').value = '';
+          }
+        }
         
-        adjustWrapperHeight();
+        setTimeout(adjustWrapperHeight, 50);
+      }
+    });
+  });
+
+  // ==========================================
+  // RADIO CARD BUTTONS (Step 6 location type)
+  // ==========================================
+  const radioCardButtons = document.querySelectorAll('.radio-card-btn');
+  radioCardButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const fieldId = btn.getAttribute('data-field');
+      const value = btn.getAttribute('data-value');
+      const hiddenInput = document.getElementById(fieldId);
+      if (hiddenInput) {
+        hiddenInput.value = value;
+        // Toggle active class in the group
+        const group = btn.closest('.radio-card-group');
+        group.querySelectorAll('.radio-card-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        // Clear error
+        const groupFormGroup = group.closest('.form-group');
+        groupFormGroup.classList.remove('has-error');
+        const errMsg = groupFormGroup.querySelector('.error-message');
+        if (errMsg) errMsg.style.display = 'none';
+        setTimeout(adjustWrapperHeight, 50);
       }
     });
   });
@@ -880,6 +997,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function submitForm() {
     // Gather values
+    const revenueRaw = parseInt(document.getElementById('business-revenue').value);
+    const revenueFormatted = revenueRaw >= 5000000 ? '$5,000,000+' : '$' + revenueRaw.toLocaleString('en-CA');
+    const canadaVal = document.getElementById('revenue-canada').value;
+    const homeVal = document.getElementById('business-home').value;
+
     const data = {
       coverageStart: dateInput.value,
       profession: industryInput.value,
@@ -893,10 +1015,14 @@ document.addEventListener('DOMContentLoaded', () => {
       ownerGender: genderHiddenInput.value,
       phone: document.getElementById('contact-phone').value,
       email: document.getElementById('contact-email').value,
-      businessHome: document.getElementById('business-home').value,
+      businessHome: homeVal,
+      locationType: homeVal === 'No' ? (document.getElementById('business-location-type').value || '—') : 'N/A (Home)',
+      premises: homeVal === 'No' ? (document.getElementById('business-premises').value || '—') : 'N/A (Home)',
       establishedYear: document.getElementById('business-established-year').value,
-      grossRevenue: document.getElementById('business-revenue').value,
-      revenueCanada: document.getElementById('revenue-canada').value
+      grossRevenue: revenueFormatted,
+      revenueCanada: canadaVal,
+      revenueUS: canadaVal === 'No' ? (document.getElementById('revenue-us-percent').value + '%') : 'N/A',
+      revenueOther: canadaVal === 'No' ? (document.getElementById('revenue-other-percent').value + '%') : 'N/A'
     };
 
     // Construct summary details
@@ -942,6 +1068,15 @@ document.addEventListener('DOMContentLoaded', () => {
           <span class="summary-label">Home Business?</span>
           <span class="summary-val">${data.businessHome}</span>
         </div>
+        ${data.businessHome === 'No' ? `
+        <div class="summary-item">
+          <span class="summary-label">Location Type</span>
+          <span class="summary-val">${data.locationType}</span>
+        </div>
+        <div class="summary-item">
+          <span class="summary-label">Own / Lease</span>
+          <span class="summary-val">${data.premises}</span>
+        </div>` : ''}
         <div class="summary-item">
           <span class="summary-label">Established Year</span>
           <span class="summary-val">${data.establishedYear}</span>
@@ -950,10 +1085,19 @@ document.addEventListener('DOMContentLoaded', () => {
           <span class="summary-label">Gross Annual Revenue</span>
           <span class="summary-val">${data.grossRevenue}</span>
         </div>
-        <div class="summary-item col-span-full">
+        <div class="summary-item ${data.revenueCanada === 'No' ? '' : 'col-span-full'}">
           <span class="summary-label">Canada Revenue Only?</span>
           <span class="summary-val">${data.revenueCanada}</span>
         </div>
+        ${data.revenueCanada === 'No' ? `
+        <div class="summary-item">
+          <span class="summary-label">US Revenue %</span>
+          <span class="summary-val">${data.revenueUS}</span>
+        </div>
+        <div class="summary-item col-span-full">
+          <span class="summary-label">Other International %</span>
+          <span class="summary-val">${data.revenueOther}</span>
+        </div>` : ''}
       </div>
     `;
 
@@ -978,10 +1122,25 @@ document.addEventListener('DOMContentLoaded', () => {
     genderButtons.forEach(b => b.classList.remove('active'));
     genderHiddenInput.value = '';
     
-    // Reset new toggle buttons
+    // Reset toggle buttons
     document.querySelectorAll('.toggle-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.radio-card-btn').forEach(b => b.classList.remove('active'));
     document.getElementById('business-home').value = '';
     document.getElementById('revenue-canada').value = '';
+    document.getElementById('business-location-type').value = '';
+    document.getElementById('business-premises').value = '';
+
+    // Hide conditional sections
+    document.getElementById('business-location-questions').classList.add('hidden');
+    document.getElementById('non-canada-questions').classList.add('hidden');
+
+    // Reset slider
+    if (revenueSlider) {
+      revenueSlider.value = 500000;
+      revenueHiddenInput.value = 500000;
+      revenueDisplayValue.textContent = '$500,000';
+      updateSliderTrack();
+    }
     
     // Reset form display and positions
     form.style.display = 'flex';
