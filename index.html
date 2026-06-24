@@ -4,10 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Commercial Property and General Liability Insurance Quote</title>
-  <!-- Load Inter and Outfit Fonts for a premium look -->
+  <!-- Load Open Sans Font to match TD Insurance typography -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Load Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -23,9 +25,8 @@
       </div>
       <div class="header-phone">
         <a href="tel:1-833-699-0452" class="phone-link">
-          <span class="phone-icon">📞</span>
           <span class="phone-number">1-833-699-0452</span>
-          <span class="phone-arrow">&gt;</span>
+          <i class="fa-solid fa-chevron-right phone-arrow"></i>
         </a>
       </div>
     </div>
@@ -41,7 +42,7 @@
       </div>
       <div class="progress-right">
         <span class="secure-badge">
-          <span class="secure-icon">🔒</span> Secure application
+          <span class="secure-icon"><i class="fa-solid fa-lock" style="font-size: 11px; margin-right: 4px;"></i></span> Secure application
         </span>
       </div>
     </div>
@@ -49,6 +50,12 @@
     <div class="progress-bar-bg">
       <div id="progress-bar-fill" class="progress-bar-fill" style="width: 11.1%;"></div>
     </div>
+  </div>
+
+  <div class="global-back-container">
+    <button type="button" id="global-back-btn" class="btn-global-back hidden">
+      <i class="fa-solid fa-chevron-left" style="font-size: 11px; margin-right: 4px;"></i> Back
+    </button>
   </div>
 
   <!-- Main Multi-step Form Content -->
@@ -72,7 +79,7 @@
                   <input type="text" id="coverage-date-input" name="coverage_start_date" placeholder="Select coverage start date" readonly>
                 </div>
                 <button type="button" class="input-icon-btn" id="calendar-toggle-btn" aria-label="Open Calendar">
-                  📅
+                  <i class="fa-regular fa-calendar-days" style="color: var(--primary-color); font-size: 16px;"></i>
                 </button>
               </div>
               <p class="field-subtext">Select a coverage start date within 90 days from the date you began this quote</p>
@@ -123,7 +130,7 @@
                   <label for="industry-search-input" class="field-label">Profession or Industry</label>
                   <input type="text" id="industry-search-input" name="profession_industry" placeholder="Search profession (e.g. Consultant, Retail...)" autocomplete="off">
                 </div>
-                <span class="select-chevron">▼</span>
+                <span class="select-chevron"><i class="fa-solid fa-chevron-down"></i></span>
               </div>
               <p class="field-subtext">E.g. Construction Contractor, Consultant, Retail, etc.</p>
               <div class="error-message" id="error-industry">Please search and select a profession from the list.</div>
@@ -408,10 +415,10 @@
               <div class="form-group">
                 <label class="field-label" style="text-transform: none; font-size: 16px; font-weight: 600; margin-bottom: 12px; display: block; color: var(--text-dark);">What type of location is your business in?</label>
                 <div class="radio-card-group">
-                  <button type="button" class="radio-card-btn" data-field="business-location-type" data-value="Office Building">🏢 Office Building</button>
-                  <button type="button" class="radio-card-btn" data-field="business-location-type" data-value="Retail / Storefront">🛍️ Retail / Storefront</button>
-                  <button type="button" class="radio-card-btn" data-field="business-location-type" data-value="Industrial / Warehouse">🏭 Industrial / Warehouse</button>
-                  <button type="button" class="radio-card-btn" data-field="business-location-type" data-value="Other">📍 Other</button>
+                  <button type="button" class="radio-card-btn" data-field="business-location-type" data-value="Office Building"><i class="fa-solid fa-building" style="margin-right: 6px;"></i> Office Building</button>
+                  <button type="button" class="radio-card-btn" data-field="business-location-type" data-value="Retail / Storefront"><i class="fa-solid fa-store" style="margin-right: 6px;"></i> Retail / Storefront</button>
+                  <button type="button" class="radio-card-btn" data-field="business-location-type" data-value="Industrial / Warehouse"><i class="fa-solid fa-industry" style="margin-right: 6px;"></i> Industrial / Warehouse</button>
+                  <button type="button" class="radio-card-btn" data-field="business-location-type" data-value="Other"><i class="fa-solid fa-location-dot" style="margin-right: 6px;"></i> Other</button>
                   <input type="hidden" id="business-location-type" name="business_location_type" value="">
                 </div>
                 <div class="error-message" id="error-location-type">Please select your business location type.</div>
@@ -584,7 +591,7 @@
       <!-- Success/Confirmation screen -->
       <div id="success-screen" class="success-card hidden">
         <div class="success-icon-container">
-          <div class="success-checkmark">✓</div>
+          <div class="success-checkmark"><i class="fa-solid fa-check"></i></div>
         </div>
         <h2 class="success-title">Thank You!</h2>
         <p class="success-lead">Your commercial insurance quote request has been submitted successfully.</p>
@@ -604,12 +611,30 @@
     </div>
   </main>
 
-  <footer class="form-footer" style="margin-top: 100px !important; margin-bottom: 50px !important;">
+  <footer class="form-footer">
     <div class="footer-container">
-      <p>&copy; 2026 Red Shield Insurance. Inspired by commercial insurance quoting systems. All rights reserved.</p>
-      <p class="footer-links">
-        <a href="#">Privacy &amp; Security</a> | <a href="#">Terms of Use</a> | <a href="#">Legal Info</a>
-      </p>
+      <div class="footer-top-row">
+        <img src="green_armchair.png" alt="TD Insurance Armchair" class="footer-armchair">
+        <div class="footer-contact-block">
+          <h3 class="footer-contact-title">Need to talk to us directly? <a href="tel:1-833-699-0452" class="footer-contact-phone">Call 1-833-699-0452<span class="footer-contact-phone-arrow"> &gt;</span></a></h3>
+          <p class="footer-hours">
+            Monday to Friday: 8:00 a.m. to 8:00 p.m.<br>
+            Saturday: 9:00 a.m. to 4:00 p.m.
+          </p>
+        </div>
+      </div>
+      <div class="footer-links-row">
+        <a href="#" class="footer-link">Privacy and Security</a>
+        <a href="#" class="footer-link">Legal</a>
+        <a href="#" class="footer-link">Accessibility</a>
+        <a href="#" class="footer-link">Our Companies</a>
+        <a href="#" class="footer-link">Manage online experience</a>
+      </div>
+      <p class="footer-underwriter">Offered by: Security National Insurance Company</p>
+      <p class="footer-copyright">&copy; Copyright 2026 The Toronto-Dominion Bank and/or its affiliates. All rights reserved.</p>
+      <button type="button" class="btn-scroll-top" id="scroll-to-top-btn">
+        <i class="fa-solid fa-chevron-up btn-scroll-top-arrow" style="font-size: 11px;"></i> Top
+      </button>
     </div>
   </footer>
 
@@ -618,21 +643,21 @@
     <div class="modal-card">
       <button type="button" class="modal-close-btn" id="close-modal-btn" aria-label="Close Help Modal">&times;</button>
       <div class="modal-header">
-        <span class="modal-icon">💡</span>
+        <span class="modal-icon"><i class="fa-regular fa-lightbulb" style="color: var(--primary-color); font-size: 18px;"></i></span>
         <h3 class="modal-title">Need Assistance?</h3>
       </div>
       <div class="modal-body">
         <p class="modal-intro">We are here to help you get the right coverage for your business.</p>
         
         <div class="help-section">
-          <h4>📞 Speak to an Insurance Agent</h4>
+          <h4><i class="fa-solid fa-phone" style="color: var(--primary-color); margin-right: 6px; font-size: 14px;"></i> Speak to an Insurance Agent</h4>
           <p>Have questions about your coverage or this form? Call us toll-free:</p>
           <a href="tel:1-833-699-0452" class="help-phone-btn">Call 1-833-699-0452</a>
           <span class="help-hours">Hours: Monday to Friday, 8:00 AM – 8:00 PM EST</span>
         </div>
 
         <div class="help-faq-section">
-          <h4>💬 Frequently Asked Questions</h4>
+          <h4><i class="fa-regular fa-comments" style="color: var(--primary-color); margin-right: 6px; font-size: 14px;"></i> Frequently Asked Questions</h4>
           
           <div class="faq-item">
             <h5 class="faq-question">What date should I choose for coverage? <span class="faq-toggle">+</span></h5>

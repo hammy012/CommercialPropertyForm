@@ -42,6 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const stepCards = document.querySelectorAll('.step-card');
   const nextButtons = document.querySelectorAll('.btn-next');
   const backButtons = document.querySelectorAll('.btn-back');
+  const globalBackBtn = document.getElementById('global-back-btn');
   
   // Progress subheader elements
   const progressStepNum = document.getElementById('current-step-num');
@@ -106,6 +107,15 @@ document.addEventListener('DOMContentLoaded', () => {
       progressBarFill.style.width = `${fillPercentage}%`;
       progressSubheader.classList.remove('hidden');
     }
+
+    // Show/hide global back button
+    if (globalBackBtn) {
+      if (currentStep > 1 && currentStep <= totalSteps) {
+        globalBackBtn.classList.remove('hidden');
+      } else {
+        globalBackBtn.classList.add('hidden');
+      }
+    }
   }
 
   function enableFormControls(container, enabled) {
@@ -128,7 +138,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // Smooth sliding transition by translating the quote form vertically
+  // Smooth slide transition by scrolling page back to top of current active card
   function slideToActiveStep() {
     const activeCard = document.getElementById(`step-${currentStep}`);
     if (activeCard && wrapper) {
@@ -137,9 +147,6 @@ document.addEventListener('DOMContentLoaded', () => {
       // Prevent browser auto-scroll on the wrapper from clipping elements
       wrapper.scrollTop = 0;
       wrapper.scrollLeft = 0;
-      
-      const offsetTop = activeCard.offsetTop;
-      form.style.transform = `translateY(-${offsetTop}px)`;
       
       // Scroll viewport window back to the top of the form card (below sticky headers)
       const headerOffset = 130; 
@@ -202,6 +209,15 @@ document.addEventListener('DOMContentLoaded', () => {
       navigateBack(target);
     });
   });
+
+  // Bind global back button click listener
+  if (globalBackBtn) {
+    globalBackBtn.addEventListener('click', () => {
+      if (currentStep > 1) {
+        navigateBack(currentStep - 1);
+      }
+    });
+  }
 
 
   // ==========================================
@@ -1132,7 +1148,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     
     // Reset form display and positions
-    form.style.display = 'flex';
+    form.style.display = 'block';
     form.style.transform = 'translateY(0px)';
     
     // Reset layout states
@@ -1220,6 +1236,29 @@ document.addEventListener('DOMContentLoaded', () => {
       wrapper.scrollLeft = 0;
     });
   }
+
+  // Scroll to top button functionality
+  const scrollTopBtn = document.getElementById('scroll-to-top-btn');
+  if (scrollTopBtn) {
+    scrollTopBtn.addEventListener('click', () => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+  }
+
+  // Inject Save up to 30% discount badge in all step navigations
+  const navigations = document.querySelectorAll('.step-navigation');
+  navigations.forEach(nav => {
+    const badge = document.createElement('div');
+    badge.className = 'save-badge-container';
+    badge.innerHTML = `
+      <span class="save-badge-plus">+</span>
+      <span class="save-badge-text">Save up to 30%</span>
+    `;
+    nav.appendChild(badge);
+  });
 
   updateStepsUI();
   setTimeout(slideToActiveStep, 100);
