@@ -220,7 +220,7 @@ body {
 .form-wrapper {
   width: 100%;
   max-width: 720px;
-  overflow: hidden;
+  overflow: visible;
   position: relative;
   transition: height 0.6s cubic-bezier(0.645, 0.045, 0.355, 1);
 }
